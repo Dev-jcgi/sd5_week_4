@@ -1,0 +1,17 @@
+<section id="practicas" data-transition="push" style="background:#F2F1EA;color:#10141A;font-family:'Space Grotesk', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:3px;color:#C2410C;text-transform:uppercase">04 · Tipos y patrones · Buenas prácticas</p>
+<h2 style="font-size:72px;font-weight:700;line-height:1.05;letter-spacing:-2px">Diseñar eventos que envejezcan bien</h2>
+<table style="font-size:27px;color:#10141A">
+<tr><th style="width:26%;text-align:left">Práctica</th><th style="width:30%;text-align:left">Evitar</th><th style="width:44%;text-align:left">Preferir</th></tr>
+<tr><td>Nombre consistente, en pasado</td><td style="color:#B42318">ProcessImage</td><td style="color:#2F6B00">ImageProcessed</td></tr>
+<tr><td>Versionado explícito</td><td style="color:#B42318">image-event</td><td style="color:#2F6B00">pixpro.image.processed.v1</td></tr>
+<tr><td>Agrupar por contexto</td><td style="color:#B42318">un único tópico “events”</td><td style="color:#2F6B00">pixpro.images.* · pixpro.batches.*</td></tr>
+<tr><td>Validación y esquemas</td><td style="color:#B42318">JSON libre</td><td style="color:#2F6B00">JSON Schema o Avro + registro de esquemas</td></tr>
+</table>
+<div style="display:flex;flex-direction:row;gap:24px">
+<div style="flex:1;background:#10141A;color:#EEF0E8;border-radius:20px;padding:28px 32px;display:flex;flex-direction:column;gap:8px"><h3 style="font-size:30px;font-weight:700;color:#C6F33A">Cambio compatible</h3><p style="font-size:26px;line-height:1.4;color:#C3CAD6">Agregar un campo opcional: los consumidores viejos lo ignoran.</p></div>
+<div style="flex:1;background:#10141A;color:#EEF0E8;border-radius:20px;padding:28px 32px;display:flex;flex-direction:column;gap:8px"><h3 style="font-size:30px;font-weight:700;color:#FF8A3D">Cambio que rompe</h3><p style="font-size:26px;line-height:1.4;color:#C3CAD6">Renombrar o quitar un campo: publica v2 y convive con v1.</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#5B6372">Fuentes: SD5 – Semana 4 · Junta de Andalucía (registro de esquemas Apicurio) · Verdejo (2020)</p>
+
+</section>

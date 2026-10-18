@@ -1,0 +1,43 @@
+<section id="colapubsub" data-transition="push" style="background:#0B0E13;color:#EEF0E8;font-family:'Space Grotesk', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:3px;color:#C6F33A;text-transform:uppercase">03 · Corredores de mensajes · Patrones de comunicación</p>
+<h2 style="font-size:72px;font-weight:700;line-height:1.05;letter-spacing:-2px">Cola de mensajes vs. Pub/Sub</h2>
+<x-embed style="position:absolute;left:128px;top:320px;width:1664px;height:590px"><!doctype html><html><head><style>
+body{margin:0;background:transparent;font-family:ui-sans-serif,system-ui,Segoe UI,Arial,sans-serif;color:#EEF0E8;overflow:hidden}
+.pn{position:absolute;top:0;width:808px;height:590px;border-radius:24px;background:#10151D;border:2px solid #2B3647}
+.tt{position:absolute;left:32px;top:22px;font-size:30px;font-weight:700}
+.b{position:absolute;border-radius:14px;background:#1A222D;border:2px solid #2B3647;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;text-align:center}
+.q{position:absolute;left:300px;top:200px;width:150px;height:100px;border-radius:14px;border:3px solid #6EA8FF;background:repeating-linear-gradient(90deg,#1A222D 0 34px,#24303F 34px 38px);display:flex;align-items:flex-end;justify-content:center;font-size:24px;font-family:ui-monospace,Menlo,Consolas,monospace;color:#6EA8FF;padding-bottom:4px;box-sizing:border-box}
+.x{position:absolute;left:310px;top:195px;width:110px;height:110px;transform:rotate(45deg);border-radius:14px;border:3px solid #FF8A3D;background:#1A222D}
+.xl{position:absolute;left:300px;top:228px;width:130px;text-align:center;font-size:24px;font-family:ui-monospace,Menlo,Consolas,monospace;color:#FF8A3D}
+.m{position:absolute;left:150px;top:238px;width:26px;height:26px;border-radius:6px;opacity:0;animation:mv 3s infinite}
+@keyframes mv{0%{transform:translate(0,0);opacity:0}8%{opacity:1}40%{transform:translate(220px,0)}80%{transform:translate(480px,var(--y));opacity:1}92%,100%{transform:translate(480px,var(--y));opacity:0}}
+.cap{position:absolute;left:32px;right:32px;bottom:24px;font-size:26px;line-height:1.35;color:#C3CAD6}
+</style></head><body>
+<div class="pn" style="left:0">
+<div class="tt" style="color:#6EA8FF">Cola: cada mensaje a UN consumidor</div>
+<div class="b" style="left:24px;top:200px;width:126px;height:100px">API</div>
+<div class="q">queue</div>
+<div class="b" style="left:640px;top:80px;width:150px;height:84px">Digester 1</div>
+<div class="b" style="left:640px;top:208px;width:150px;height:84px">Digester 2</div>
+<div class="b" style="left:640px;top:336px;width:150px;height:84px">Digester 3</div>
+<div class="m" style="background:#FF8A3D;--y:-128px"></div>
+<div class="m" style="background:#C6F33A;--y:0px;animation-delay:1s"></div>
+<div class="m" style="background:#B78CFF;--y:128px;animation-delay:2s"></div>
+<div class="cap">Competing consumers: cada imagen la procesa un solo Digester. Más Digesters = más paralelismo.</div>
+</div>
+<div class="pn" style="left:856px">
+<div class="tt" style="color:#FF8A3D">Pub/Sub: cada evento a TODOS</div>
+<div class="b" style="left:24px;top:200px;width:126px;height:100px">Digester</div>
+<div class="x"></div><div class="xl">topic</div>
+<div class="b" style="left:640px;top:80px;width:150px;height:84px">Notifier</div>
+<div class="b" style="left:640px;top:208px;width:150px;height:84px">Auditoría</div>
+<div class="b" style="left:640px;top:336px;width:150px;height:84px">Métricas</div>
+<div class="m" style="background:#C6F33A;--y:-128px"></div>
+<div class="m" style="background:#C6F33A;--y:0px"></div>
+<div class="m" style="background:#C6F33A;--y:128px"></div>
+<div class="cap">Fan-out: ProcessingCompleted le llega a cada suscriptor, que reacciona a su manera.</div>
+</div>
+</body></html></x-embed>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#8A93A3">Fuentes: SD5 – Semana 4 (“Message Queues vs Event Brokers”; Springwolf, Medium) · ilustrativo</p>
+
+</section>

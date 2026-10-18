@@ -1,0 +1,44 @@
+<section id="gitflow" data-transition="push" style="background:#0B0E13;color:#EEF0E8;font-family:'Space Grotesk', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:3px;color:#C6F33A;text-transform:uppercase">01 · Capstone · Modelo de ramificación</p>
+<h2 style="font-size:72px;font-weight:700;line-height:1.05;letter-spacing:-2px">Gitflow: cada cambio en su rama</h2>
+<x-embed style="position:absolute;left:128px;top:330px;width:1664px;height:590px"><!doctype html><html><head><style>
+body{margin:0;background:transparent;font-family:ui-monospace,Menlo,Consolas,monospace;color:#EEF0E8;overflow:hidden}
+.lb{position:absolute;left:0;width:360px;font-size:26px;font-weight:700}
+svg{position:absolute;left:0;top:0}
+.p{fill:none;stroke-width:6;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:dr 12s infinite}
+@keyframes dr{0%{stroke-dashoffset:1}12%,88%{stroke-dashoffset:0}100%{stroke-dashoffset:0;opacity:0}}
+.c{stroke:#0B0E13;stroke-width:5;opacity:0;animation:ap 12s infinite}
+@keyframes ap{0%{opacity:0}4%,88%{opacity:1}100%{opacity:0}}
+.mr{position:absolute;left:400px;top:540px;width:1260px;font-size:24px;color:#A7B0BE}
+.mr span{position:absolute;left:0;opacity:0;animation:tk 12s infinite}
+@keyframes tk{0%{opacity:0}3%,30%{opacity:1}34%,100%{opacity:0}}
+</style></head><body>
+<div class="lb" style="top:32px;color:#FF8A3D">main</div>
+<div class="lb" style="top:132px;color:#FF6B8B">hotfix/*</div>
+<div class="lb" style="top:242px;color:#6EA8FF">develop</div>
+<div class="lb" style="top:352px;color:#C6F33A">feature/digester</div>
+<div class="lb" style="top:462px;color:#B78CFF">feature/websocket</div>
+<svg width="1664" height="590" viewBox="0 0 1664 590">
+<path class="p" pathLength="1" d="M420 50 L1640 50" stroke="#FF8A3D" style="animation-delay:0s"/>
+<path class="p" pathLength="1" d="M420 50 L480 260 L1640 260" stroke="#6EA8FF" style="animation-delay:.6s"/>
+<path class="p" pathLength="1" d="M560 260 L620 370 L720 370 L780 260" stroke="#C6F33A" style="animation-delay:1.6s"/>
+<path class="p" pathLength="1" d="M840 260 L900 480 L1100 480 L1160 260" stroke="#B78CFF" style="animation-delay:2.6s"/>
+<path class="p" pathLength="1" d="M960 50 L1020 150 L1080 150 L1140 50 M1080 150 L1180 260" stroke="#FF6B8B" style="animation-delay:3.6s"/>
+<path class="p" pathLength="1" d="M1440 260 L1520 50" stroke="#6EA8FF" style="animation-delay:4.6s"/>
+<circle class="c" cx="420" cy="50" r="16" fill="#FF8A3D" style="animation-delay:.2s"/>
+<circle class="c" cx="560" cy="260" r="14" fill="#6EA8FF" style="animation-delay:1s"/>
+<circle class="c" cx="640" cy="370" r="14" fill="#C6F33A" style="animation-delay:2s"/>
+<circle class="c" cx="700" cy="370" r="14" fill="#C6F33A" style="animation-delay:2.3s"/>
+<circle class="c" cx="780" cy="260" r="14" fill="#6EA8FF" style="animation-delay:2.7s"/>
+<circle class="c" cx="940" cy="480" r="14" fill="#B78CFF" style="animation-delay:3s"/>
+<circle class="c" cx="1020" cy="480" r="14" fill="#B78CFF" style="animation-delay:3.3s"/>
+<circle class="c" cx="1050" cy="150" r="14" fill="#FF6B8B" style="animation-delay:4s"/>
+<circle class="c" cx="1140" cy="50" r="16" fill="#FF8A3D" style="animation-delay:4.3s"/>
+<circle class="c" cx="1160" cy="260" r="14" fill="#6EA8FF" style="animation-delay:4.4s"/>
+<circle class="c" cx="1520" cy="50" r="18" fill="#FF8A3D" style="animation-delay:5.4s"/>
+</svg>
+<div class="mr"><span>MR !14 feature/digester → develop · review ✓ · tests ✓ · coverage 71%</span><span style="animation-delay:3.6s">hotfix/upload-timeout → main y develop · v0.1.1</span><span style="animation-delay:7.2s">develop → main · release v0.2 (Fase 1)</span></div>
+</body></html></x-embed>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#8A93A3">Ilustrativo · main estable · develop integra · feature/* por historia · hotfix/* para producción</p>
+
+</section>

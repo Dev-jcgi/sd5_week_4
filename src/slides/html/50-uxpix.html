@@ -1,0 +1,43 @@
+<section id="uxpix" data-transition="push" style="background:#0B0E13;color:#EEF0E8;font-family:'Space Grotesk', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:3px;color:#C6F33A;text-transform:uppercase">05 · Consistencia eventual · Aplicado a PixPro</p>
+<h2 style="font-size:72px;font-weight:700;line-height:1.05;letter-spacing:-2px">Diseñar la espera</h2>
+<x-embed style="position:absolute;left:128px;top:290px;width:900px;height:620px"><!doctype html><html><head><style>
+body{margin:0;background:#141A22;border:2px solid #2B3647;border-radius:24px;height:616px;box-sizing:border-box;font-family:ui-sans-serif,system-ui,Segoe UI,Arial,sans-serif;color:#EEF0E8;overflow:hidden;position:relative}
+.top{height:70px;border-bottom:2px solid #2B3647;display:flex;align-items:center;padding:0 28px;gap:14px;font-size:26px;font-weight:700}
+.top i{width:16px;height:16px;border-radius:50%;background:#C6F33A}
+.g{position:absolute;top:100px;left:28px;right:28px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px}
+.c{height:440px;border-radius:18px;background:#0F141B;overflow:hidden;position:relative}
+.im{height:300px;background:linear-gradient(135deg,#3A1D6E,#FF8A3D);filter:grayscale(1) blur(4px);animation:rv 9s infinite}
+.c:nth-child(2) .im{background:linear-gradient(135deg,#0F2A55,#6EA8FF);animation-delay:1.5s}
+.c:nth-child(3) .im{background:linear-gradient(135deg,#2A3300,#C6F33A);animation-delay:3s}
+@keyframes rv{0%,55%{filter:grayscale(1) blur(4px)}65%,95%{filter:none}100%{filter:grayscale(1) blur(4px)}}
+.bd{position:absolute;left:18px;top:320px;right:18px;height:40px;font-size:24px;font-weight:700}
+.bd span{position:absolute;left:0;opacity:0;padding:4px 14px;border-radius:999px}
+.s1{background:#2B3647;animation:b1 9s infinite}.s2{background:#6EA8FF;color:#0B0E13;animation:b2 9s infinite}.s3{background:#C6F33A;color:#0B0E13;animation:b3 9s infinite}
+@keyframes b1{0%,25%{opacity:1}28%,100%{opacity:0}}
+@keyframes b2{0%,27%{opacity:0}30%,55%{opacity:1}58%,100%{opacity:0}}
+@keyframes b3{0%,57%{opacity:0}60%,95%{opacity:1}100%{opacity:0}}
+.c:nth-child(2) span{animation-delay:1.5s}.c:nth-child(3) span{animation-delay:3s}
+.pb{position:absolute;left:18px;right:18px;top:390px;height:12px;border-radius:6px;background:#2B3647;overflow:hidden}
+.pb i{position:absolute;left:0;top:0;bottom:0;background:#6EA8FF;animation:pg 9s infinite}
+.c:nth-child(2) .pb i{animation-delay:1.5s}.c:nth-child(3) .pb i{animation-delay:3s}
+@keyframes pg{0%,27%{width:0}57%{width:100%;background:#6EA8FF}60%,95%{width:100%;background:#C6F33A}100%{width:0}}
+</style></head><body>
+<div class="top"><i></i>Lote b_77 · 3 imágenes · actualizado por WebSocket</div>
+<div class="g">
+<div class="c"><div class="im"></div><div class="bd"><span class="s1">En cola</span><span class="s2">Procesando</span><span class="s3">Lista ✓</span></div><div class="pb"><i></i></div></div>
+<div class="c"><div class="im"></div><div class="bd"><span class="s1">En cola</span><span class="s2">Procesando</span><span class="s3">Lista ✓</span></div><div class="pb"><i></i></div></div>
+<div class="c"><div class="im"></div><div class="bd"><span class="s1">En cola</span><span class="s2">Procesando</span><span class="s3">Lista ✓</span></div><div class="pb"><i></i></div></div>
+</div>
+</body></html></x-embed>
+<div style="display:flex;flex-direction:row;gap:0">
+<div style="width:960px;height:620px;background:#0B0E13"></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:26px">
+<div style="display:flex;flex-direction:column;gap:6px"><h3 style="font-size:32px;font-weight:700;color:#C6F33A">Estados visibles</h3><p style="font-size:26px;line-height:1.4;color:#A7B0BE">En cola → Procesando → Lista. El usuario entiende que va en camino.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><h3 style="font-size:32px;font-weight:700;color:#6EA8FF">Push, no polling</h3><p style="font-size:26px;line-height:1.4;color:#A7B0BE">Cada cambio llega por WebSocket al consumir ProcessingCompleted.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><h3 style="font-size:32px;font-weight:700;color:#FF8A3D">Llave de idempotencia</h3><p style="font-size:26px;line-height:1.4;color:#A7B0BE">imageId + filtro: si el mensaje llega dos veces, no se procesa ni cobra doble.</p></div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#8A93A3">Maqueta ilustrativa de la galería de PixPro</p>
+
+</section>

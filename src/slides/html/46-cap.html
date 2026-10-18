@@ -1,0 +1,34 @@
+<section id="cap" data-transition="push" style="background:#0B0E13;color:#EEF0E8;font-family:'Space Grotesk', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:3px;color:#C6F33A;text-transform:uppercase">05 · Consistencia eventual · Teorema CAP</p>
+<h2 style="font-size:72px;font-weight:700;line-height:1.05;letter-spacing:-2px">CAP: elige dos de tres</h2>
+<x-embed style="position:absolute;left:128px;top:300px;width:860px;height:620px"><!doctype html><html><head><style>
+body{margin:0;background:transparent;font-family:ui-sans-serif,system-ui,Segoe UI,Arial,sans-serif;color:#EEF0E8;overflow:hidden}
+svg{position:absolute;left:0;top:0}
+.v{position:absolute;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:56px;font-weight:800;color:#0B0E13}
+.e{position:absolute;font-size:24px;line-height:1.3;text-align:center;width:300px;margin-left:-150px}
+.e b{font-size:30px;display:block}
+.ap{stroke-dasharray:18 12;animation:da 1.2s linear infinite}
+@keyframes da{to{stroke-dashoffset:-30}}
+.gl{animation:gl 2.4s ease-in-out infinite}
+@keyframes gl{50%{filter:drop-shadow(0 0 18px #C6F33A)}}
+</style></head><body>
+<svg width="860" height="620" viewBox="0 0 860 620"><line x1="430" y1="90" x2="110" y2="530" stroke="#2B3647" stroke-width="8"/><line x1="430" y1="90" x2="750" y2="530" stroke="#2B3647" stroke-width="8"/><line class="ap" x1="110" y1="530" x2="750" y2="530" stroke="#C6F33A" stroke-width="10"/></svg>
+<div class="v" style="left:430px;top:90px;background:#6EA8FF">C</div>
+<div class="v gl" style="left:110px;top:530px;background:#FF8A3D">A</div>
+<div class="v gl" style="left:750px;top:530px;background:#B78CFF">P</div>
+<div class="e" style="left:120px;top:200px;width:200px;margin-left:-100px"><b style="color:#6EA8FF">CA</b>monolito, sin partición</div>
+<div class="e" style="left:740px;top:200px;width:200px;margin-left:-100px"><b style="color:#B78CFF">CP</b>BD en modo estricto (p. ej. MongoDB)</div>
+<div class="e" style="left:430px;top:420px;width:360px;margin-left:-180px"><b style="color:#C6F33A">AP</b>DNS · sistemas con consistencia eventual</div>
+</body></html></x-embed>
+<div style="display:flex;flex-direction:row;gap:0">
+<div style="width:900px;height:600px;background:#0B0E13"></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:22px">
+<div style="display:flex;flex-direction:column;gap:6px"><h3 style="font-size:32px;font-weight:700;color:#6EA8FF">Consistencia</h3><p style="font-size:26px;line-height:1.35;color:#A7B0BE">Todos los nodos ven los mismos datos al mismo tiempo.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><h3 style="font-size:32px;font-weight:700;color:#FF8A3D">Disponibilidad</h3><p style="font-size:26px;line-height:1.35;color:#A7B0BE">Toda solicitud recibe respuesta, aun con fallos.</p></div>
+<div style="display:flex;flex-direction:column;gap:6px"><h3 style="font-size:32px;font-weight:700;color:#B78CFF">Tolerancia a particiones</h3><p style="font-size:26px;line-height:1.35;color:#A7B0BE">Sigue funcionando si la red divide los nodos.</p></div>
+<p style="font-size:28px;line-height:1.4">En un sistema distribuido la P no es opcional: la decisión real es C o A cuando la red falla.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#8A93A3">Fuentes: SD5 – Semana 4 (E. Brewer; “Understanding Eventual Consistency”)</p>
+
+</section>

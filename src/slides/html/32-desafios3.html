@@ -1,0 +1,20 @@
+<section id="desafios3" data-transition="push" style="background:#0B0E13;color:#EEF0E8;font-family:'Space Grotesk', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:3px;color:#C6F33A;text-transform:uppercase">03 · Corredores de mensajes · Desafíos</p>
+<h2 style="font-size:72px;font-weight:700;line-height:1.05;letter-spacing:-2px">Lo que puede salir mal</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+<div style="background:#141A22;border-left:6px solid #C6F33A;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><h3 style="font-size:32px;font-weight:700">Garantía de entrega</h3><p style="font-size:25px;line-height:1.35;color:#A7B0BE">At-most-once, at-least-once o exactly-once. Lo común: al menos una vez + ack.</p></div>
+<div style="background:#141A22;border-left:6px solid #6EA8FF;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><h3 style="font-size:32px;font-weight:700">Orden de los eventos</h3><p style="font-size:25px;line-height:1.35;color:#A7B0BE">Ordenar por recurso (misma partición o cola), no globalmente.</p></div>
+<div style="background:#141A22;border-left:6px solid #FF8A3D;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><h3 style="font-size:32px;font-weight:700">Errores y reintentos</h3><p style="font-size:25px;line-height:1.35;color:#A7B0BE">Reintentos con backoff, Dead Letter Queue y consumidores idempotentes.</p></div>
+<div style="background:#141A22;border-left:6px solid #B78CFF;border-radius:16px;padding:24px 28px;display:flex;flex-direction:column;gap:6px"><h3 style="font-size:32px;font-weight:700">Observabilidad y seguridad</h3><p style="font-size:25px;line-height:1.35;color:#A7B0BE">Trazas distribuidas, métricas de colas y control de quién publica o consume.</p></div>
+</div>
+<p style="font-size:26px;color:#A7B0BE">Confirmación del productor: más seguridad = más latencia</p>
+<div style="display:flex;flex-direction:row;gap:16px;align-items:center">
+<p style="font-size:26px;background:#1A222D;padding:16px 24px;border-radius:14px">1 · Recibido por el broker</p>
+<x-shape kind="arrow-right" style="width:56px;height:28px;background:#C6F33A"></x-shape>
+<p style="font-size:26px;background:#1A222D;padding:16px 24px;border-radius:14px">2 · Guardado por el líder</p>
+<x-shape kind="arrow-right" style="width:56px;height:28px;background:#C6F33A"></x-shape>
+<p style="font-size:26px;background:#1A222D;padding:16px 24px;border-radius:14px">3 · En todas las réplicas</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#8A93A3">Fuentes: SD5 – Semana 4 · Verdejo (UAM, 2020) · Junta de Andalucía (DLQ, trazas) · Vinueza (2026)</p>
+
+</section>

@@ -1,0 +1,36 @@
+<section id="rabbitpix" data-transition="push" style="background:#0B0E13;color:#EEF0E8;font-family:'Space Grotesk', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:3px;color:#C6F33A;text-transform:uppercase">03 · Corredores de mensajes · Aplicado a PixPro</p>
+<h2 style="font-size:72px;font-weight:700;line-height:1.05;letter-spacing:-2px">Un topic exchange para PixPro</h2>
+<x-embed style="position:absolute;left:128px;top:320px;width:1664px;height:590px"><!doctype html><html><head><style>
+body{margin:0;background:transparent;font-family:ui-sans-serif,system-ui,Segoe UI,Arial,sans-serif;color:#EEF0E8;overflow:hidden}
+.b{position:absolute;border-radius:14px;background:#141A22;border:2px solid #2B3647;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:26px;font-weight:700;text-align:center}
+.b small{font-size:24px;font-weight:400;color:#A7B0BE;font-family:ui-monospace,Menlo,Consolas,monospace}
+.q{border-color:#6EA8FF}.x{border-color:#FF8A3D;background:#22180F}
+svg{position:absolute;left:0;top:0}
+.t{position:absolute;width:24px;height:24px;margin:-12px 0 0 -12px;border-radius:50%;opacity:0}
+@keyframes a1{0%{left:200px;top:165px;opacity:0}4%{opacity:1}18%{left:540px;top:295px}36%{left:900px;top:90px;opacity:1}44%,100%{left:900px;top:90px;opacity:0}}
+@keyframes a2{0%{left:200px;top:165px;opacity:0}4%{opacity:1}18%{left:540px;top:295px}36%{left:900px;top:500px;opacity:1}44%,100%{left:900px;top:500px;opacity:0}}
+@keyframes b1{0%,50%{left:200px;top:425px;opacity:0}54%{opacity:1}68%{left:540px;top:295px}86%{left:900px;top:295px;opacity:1}94%,100%{left:900px;top:295px;opacity:0}}
+@keyframes b2{0%,50%{left:200px;top:425px;opacity:0}54%{opacity:1}68%{left:540px;top:295px}86%{left:900px;top:500px;opacity:1}94%,100%{left:900px;top:500px;opacity:0}}
+.k{position:absolute;left:0;top:560px;width:1664px;font-size:26px;font-family:ui-monospace,Menlo,Consolas,monospace;text-align:center}
+.k span{position:absolute;left:0;width:1664px;opacity:0}
+@keyframes s1{0%,2%{opacity:0}5%,46%{opacity:1}50%,100%{opacity:0}}
+@keyframes s2{0%,52%{opacity:0}55%,96%{opacity:1}100%{opacity:0}}
+</style></head><body>
+<svg width="1664" height="560" viewBox="0 0 1664 560"><g stroke="#2B3647" stroke-width="3" fill="none"><path d="M200 165 L420 280"/><path d="M200 425 L420 310"/><path d="M660 280 L900 90"/><path d="M660 295 L900 295"/><path d="M660 310 L900 500"/><path d="M1240 90 L1380 90"/><path d="M1240 295 L1380 295"/><path d="M1240 500 L1380 500"/></g></svg>
+<div class="b" style="left:0;top:120px;width:200px;height:90px">API</div>
+<div class="b" style="left:0;top:380px;width:200px;height:90px">Digester</div>
+<div class="b x" style="left:420px;top:230px;width:240px;height:130px">pixpro.events<small>topic</small></div>
+<div class="b q" style="left:900px;top:30px;width:340px;height:120px">digester.work<small>image.uploaded</small></div>
+<div class="b q" style="left:900px;top:235px;width:340px;height:120px">notifier.q<small>image.processed.#</small></div>
+<div class="b q" style="left:900px;top:440px;width:340px;height:120px">audit.q<small>#</small></div>
+<div class="b" style="left:1380px;top:40px;width:284px;height:100px">Digester</div>
+<div class="b" style="left:1380px;top:245px;width:284px;height:100px">Notifier</div>
+<div class="b" style="left:1380px;top:450px;width:284px;height:100px">Auditoría</div>
+<i class="t" style="background:#FF8A3D;animation:a1 8s infinite"></i><i class="t" style="background:#FF8A3D;animation:a2 8s infinite"></i>
+<i class="t" style="background:#C6F33A;animation:b1 8s infinite"></i><i class="t" style="background:#C6F33A;animation:b2 8s infinite"></i>
+<div class="k"><span style="color:#FF8A3D;animation:s1 8s infinite">key image.uploaded → digester.work + audit.q</span><span style="color:#C6F33A;animation:s2 8s infinite">key image.processed.completed → notifier.q + audit.q</span></div>
+</body></html></x-embed>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#8A93A3">Diseño ilustrativo · * = exactamente una palabra · # = cero o más palabras · añadan una DLQ por cola de trabajo</p>
+
+</section>

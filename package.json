@@ -1,0 +1,25 @@
+{
+  "name": "pixpro-arena",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "DS5 Semana 4 · Presentación de Arquitectura Basada en Eventos con quiz en vivo sincronizado (PixPro Arena)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "encrypt": "node scripts/encrypt-answers.mjs",
+    "sync-slides": "node scripts/sync-slides.mjs"
+  },
+  "dependencies": {
+    "canvas-confetti": "1.9.3",
+    "firebase": "10.14.1",
+    "gsap": "3.12.5",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "4.3.3",
+    "vite": "5.4.10"
+  }
+}

@@ -1,0 +1,51 @@
+<section id="eventual" data-transition="push" style="background:#0B0E13;color:#EEF0E8;font-family:'Space Grotesk', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:3px;color:#C6F33A;text-transform:uppercase">05 · Consistencia eventual · Definición y principios</p>
+<div style="width:760px;display:flex;flex-direction:column;gap:24px">
+<h2 style="font-size:60px;font-weight:700;line-height:1.1;letter-spacing:-1px">Sin nuevas escrituras, todas las réplicas convergen</h2>
+<p style="font-size:28px;line-height:1.4;color:#A7B0BE">Prioriza disponibilidad y tolerancia a particiones; acepta inconsistencias temporales.</p>
+<div style="display:flex;flex-direction:column;gap:14px">
+<p style="font-size:28px"><span style="color:#C6F33A">Asincronía</span> · los cambios se propagan sin esperar</p>
+<p style="font-size:28px"><span style="color:#6EA8FF">Replicación</span> · copias en varios nodos</p>
+<p style="font-size:28px"><span style="color:#FF8A3D">Convergencia</span> · al final, mismo estado</p>
+<p style="font-size:28px"><span style="color:#B78CFF">Tolerancia a particiones</span> · sigue con la red rota</p>
+</div>
+</div>
+<x-embed style="position:absolute;left:960px;top:200px;width:832px;height:700px"><!doctype html><html><head><style>
+body{margin:0;background:#10151D;border:2px solid #2B3647;border-radius:24px;height:696px;box-sizing:border-box;font-family:ui-sans-serif,system-ui,Segoe UI,Arial,sans-serif;color:#EEF0E8;overflow:hidden;position:relative}
+.r{position:absolute;left:60px;width:712px;height:120px;border-radius:18px;background:#1A222D;border:2px solid #2B3647;display:flex;align-items:center;padding:0 28px;box-sizing:border-box;gap:24px}
+.r b{font-size:28px;width:200px}
+.v{position:relative;width:200px;height:60px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:32px;font-weight:700}
+.v span{position:absolute;left:0;top:8px}
+.o{color:#FF6B8B}.n{color:#C6F33A;opacity:0}
+.st{font-size:24px;color:#A7B0BE;font-family:ui-monospace,Menlo,Consolas,monospace}
+.pk{position:absolute;left:400px;width:20px;height:20px;border-radius:50%;background:#C6F33A;box-shadow:0 0 16px #C6F33A;opacity:0}
+.cl{position:absolute;left:60px;right:60px;bottom:40px;height:8px;border-radius:4px;background:#1A222D}
+.cl i{position:absolute;left:0;top:0;height:8px;border-radius:4px;background:linear-gradient(90deg,#FF6B8B,#C6F33A);animation:tm 10s linear infinite}
+@keyframes tm{from{width:0}to{width:100%}}
+.cap{position:absolute;left:60px;right:60px;bottom:96px;font-size:26px;text-align:center}
+.cap span{position:absolute;left:0;right:0;opacity:0}
+</style></head><body>
+<style>
+.a .o{animation:x1 10s infinite}.a .n{animation:y1 10s infinite}
+.b .o{animation:x2 10s infinite}.b .n{animation:y2 10s infinite}
+.c .o{animation:x3 10s infinite}.c .n{animation:y3 10s infinite}
+@keyframes x1{0%,8%{opacity:1}10%,100%{opacity:0}}@keyframes y1{0%,8%{opacity:0}10%,95%{opacity:1}100%{opacity:0}}
+@keyframes x2{0%,33%{opacity:1}35%,100%{opacity:0}}@keyframes y2{0%,33%{opacity:0}35%,95%{opacity:1}100%{opacity:0}}
+@keyframes x3{0%,60%{opacity:1}62%,100%{opacity:0}}@keyframes y3{0%,60%{opacity:0}62%,95%{opacity:1}100%{opacity:0}}
+.a{animation:ha 10s infinite}@keyframes ha{8%,14%{border-color:#C6F33A}20%{border-color:#2B3647}}
+.b{animation:hb 10s infinite}@keyframes hb{33%,39%{border-color:#C6F33A}45%{border-color:#2B3647}}
+.c{animation:hc 10s infinite}@keyframes hc{20%,55%{border-color:#FF6B8B}60%,66%{border-color:#C6F33A}72%{border-color:#2B3647}}
+.c1{animation:k1 10s infinite}.c2{animation:k2 10s infinite}.c3{animation:k3 10s infinite}
+@keyframes k1{0%,4%{opacity:0}8%,28%{opacity:1}32%,100%{opacity:0}}
+@keyframes k2{0%,32%{opacity:0}36%,58%{opacity:1}62%,100%{opacity:0}}
+@keyframes k3{0%,62%{opacity:0}66%,95%{opacity:1}100%{opacity:0}}
+</style>
+<div class="r a" style="top:60px"><b>Réplica A</b><div class="v"><span class="o">v1</span><span class="n">v2</span></div><span class="st">escritura aquí</span></div>
+<div class="r b" style="top:220px"><b>Réplica B</b><div class="v"><span class="o">v1</span><span class="n">v2</span></div><span class="st">recibe evento</span></div>
+<div class="r c" style="top:380px"><b>Réplica C</b><div class="v"><span class="o">v1</span><span class="n">v2</span></div><span class="st">partición…</span></div>
+<div class="cap"><span class="c1" style="color:#C6F33A">t1 · A acepta la escritura v2</span><span class="c2" style="color:#FF6B8B">t2 · leer en C devuelve v1 (dato viejo)</span><span class="c3" style="color:#C6F33A">t3 · se recupera la red: todos en v2</span></div>
+<div class="cl"><i></i></div>
+</body></html></x-embed>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#8A93A3">Fuentes: SD5 – Semana 4 (P. Sharma; “Evolution of Eventual Consistency”) · animación ilustrativa</p>
+
+</section>

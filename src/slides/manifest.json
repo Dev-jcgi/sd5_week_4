@@ -1,0 +1,101 @@
+{
+  "title": "DS5 · Semana 4 · Arquitectura Basada en Eventos 1",
+  "order": [
+    "cover",
+    "agenda",
+    "curso",
+    "arena",
+    "g1a",
+    "pixpro",
+    "p4",
+    "metodo",
+    "gitflow",
+    "ci",
+    "calidad",
+    "casos",
+    "c4n1",
+    "c4n2",
+    "secuencia",
+    "fase1",
+    "g1b",
+    "g2a",
+    "d2",
+    "queeseda",
+    "syncasync",
+    "problemas",
+    "componentes",
+    "beneficios",
+    "g2b",
+    "g3a",
+    "d3",
+    "broker",
+    "colapubsub",
+    "protocolos",
+    "comparativa",
+    "desafios3",
+    "rabbitpix",
+    "g3b",
+    "g4a",
+    "d4",
+    "tipos",
+    "estructura",
+    "integracion",
+    "avanzados",
+    "practicas",
+    "g4b",
+    "g5a",
+    "d5",
+    "eventual",
+    "cap",
+    "acidbase",
+    "conflictos",
+    "saga",
+    "uxpix",
+    "g5b",
+    "g6a",
+    "d6",
+    "desafios6",
+    "patrones6",
+    "outbox",
+    "strangler",
+    "g6b",
+    "resumen",
+    "tarea",
+    "fuentes",
+    "gracias"
+  ],
+  "sections": [
+    {
+      "title": "Apertura: portada, agenda, estructura del curso y reglas de la Arena PixPro",
+      "start": "cover"
+    },
+    {
+      "title": "Capstone checkpoint: estado de PixPro, 4P, metodología, calidad, diagramas y Fase 1",
+      "start": "g1a"
+    },
+    {
+      "title": "Introducción a la arquitectura basada en eventos (EDA)",
+      "start": "g2a"
+    },
+    {
+      "title": "Corredores de mensajes: event bus, colas, pub/sub, protocolos y selección",
+      "start": "g3a"
+    },
+    {
+      "title": "Tipos y patrones de eventos: clasificación, estructura e integración",
+      "start": "g4a"
+    },
+    {
+      "title": "Consistencia eventual: CAP, BASE, conflictos, Saga, Outbox e idempotencia",
+      "start": "g5a"
+    },
+    {
+      "title": "Integración con sistemas existentes: desafíos, Proxy, Outbox, CDC y Strangler Fig",
+      "start": "g6a"
+    },
+    {
+      "title": "Cierre: resumen, tarea, fuentes",
+      "start": "resumen"
+    }
+  ]
+}

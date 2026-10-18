@@ -1,0 +1,39 @@
+<section id="componentes" data-transition="push" style="background:#0B0E13;color:#EEF0E8;font-family:'Space Grotesk', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:3px;color:#C6F33A;text-transform:uppercase">02 · Introducción a EDA · Componentes</p>
+<h2 style="font-size:72px;font-weight:700;line-height:1.05;letter-spacing:-2px">Cuatro piezas de EDA</h2>
+<x-embed style="position:absolute;left:128px;top:320px;width:1664px;height:420px"><!doctype html><html><head><style>
+body{margin:0;background:transparent;font-family:ui-sans-serif,system-ui,Segoe UI,Arial,sans-serif;color:#EEF0E8;overflow:hidden}
+.b{position:absolute;border-radius:18px;background:#141A22;border:3px solid #2B3647;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700}
+.cap{position:absolute;top:284px;width:380px;font-size:24px;line-height:1.25;color:#A7B0BE}
+.cap b{display:block;color:#EEF0E8;font-size:26px;margin-bottom:2px}
+.pipe{position:absolute;left:700px;top:100px;width:520px;height:90px;border-radius:45px;background:repeating-linear-gradient(90deg,#1A222D 0 40px,#202A37 40px 80px);border:3px solid #6EA8FF;animation:fl 1s linear infinite}
+@keyframes fl{to{background-position:80px 0}}
+.ev{position:absolute;left:280px;top:112px;width:150px;height:66px;border-radius:12px;background:#FF8A3D;color:#150F26;font-size:24px;font-weight:700;display:flex;align-items:center;justify-content:center;animation:mv 5s infinite}
+@keyframes mv{0%{left:280px;opacity:0;transform:scale(.6)}10%{opacity:1;transform:scale(1)}25%{left:280px}60%{left:1060px;opacity:1}75%,100%{left:1060px;opacity:0}}
+.ev2{position:absolute;left:1240px;width:110px;height:50px;border-radius:10px;background:#FF8A3D;opacity:0;animation:sp 5s infinite}
+@keyframes sp{0%,60%{opacity:0;transform:translateX(0)}65%{opacity:1}85%{opacity:1;transform:translateX(150px)}95%,100%{opacity:0;transform:translateX(150px)}}
+.c{animation:hit 5s infinite}
+@keyframes hit{0%,84%{border-color:#2B3647}86%,96%{border-color:#C6F33A;box-shadow:0 0 30px rgba(198,243,58,.45)}100%{border-color:#2B3647}}
+</style></head><body>
+<div class="b" style="left:0;top:70px;width:240px;height:150px;border-color:#FF8A3D">Productor</div>
+<div class="pipe"></div>
+<div class="ev">Evento</div>
+<div class="b c" style="left:1400px;top:20px;width:264px;height:110px">Consumidor A</div>
+<div class="b c" style="left:1400px;top:160px;width:264px;height:110px">Consumidor B</div>
+<div class="ev2" style="top:45px"></div><div class="ev2" style="top:185px"></div>
+<div class="cap" style="left:0;width:280px"><b>Productor</b>Genera eventos ante acciones o cambios de estado</div>
+<div class="cap" style="left:330px;width:330px"><b>Evento</b>Mensaje que dice qué cambió y cuándo</div>
+<div class="cap" style="left:760px;width:420px"><b>Canal / Event Bus</b>Transporta del productor a los consumidores</div>
+<div class="cap" style="left:1340px;width:324px"><b>Consumidores</b>Reaccionan; no conocen al productor</div>
+</body></html></x-embed>
+<div style="height:420px;width:1664px;background:#0B0E13"></div>
+<div style="display:flex;flex-direction:row;flex-wrap:wrap;gap:16px;align-items:center">
+<p style="font-size:24px;color:#A7B0BE">En arquitecturas de referencia también:</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;border:2px solid #2B3647;padding:6px 16px;border-radius:999px">Event store</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;border:2px solid #2B3647;padding:6px 16px;border-radius:999px">Registro de esquemas</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;border:2px solid #2B3647;padding:6px 16px;border-radius:999px">Conectores in/out</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;border:2px solid #2B3647;padding:6px 16px;border-radius:999px">Consulta de eventos</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#8A93A3">Fuentes: SD5 – Semana 4 · Junta de Andalucía, arquitectura de referencia EDA · Confluent</p>
+
+</section>

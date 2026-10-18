@@ -1,0 +1,44 @@
+<section id="syncasync" data-transition="push" style="background:#0B0E13;color:#EEF0E8;font-family:'Space Grotesk', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:3px;color:#C6F33A;text-transform:uppercase">02 · Introducción a EDA · Comparación</p>
+<h2 style="font-size:72px;font-weight:700;line-height:1.05;letter-spacing:-2px">Cadena síncrona vs. eventos</h2>
+<x-embed style="position:absolute;left:128px;top:320px;width:1664px;height:590px"><!doctype html><html><head><style>
+body{margin:0;background:transparent;font-family:ui-sans-serif,system-ui,Segoe UI,Arial,sans-serif;color:#EEF0E8;overflow:hidden}
+.pn{position:absolute;top:0;width:800px;height:590px;border-radius:24px;background:#10151D;border:2px solid #2B3647}
+.ttl{position:absolute;top:22px;left:32px;font-size:30px;font-weight:700}
+.n{position:absolute;width:150px;height:76px;border-radius:14px;background:#1A222D;border:2px solid #2B3647;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700}
+.w{position:absolute;height:10px;border-radius:5px;background:#FF6B8B;transform-origin:left;transform:scaleX(0)}
+.ln{position:absolute;height:3px;background:#2B3647}
+.ms{position:absolute;bottom:26px;left:32px;right:32px;font-size:26px;line-height:1.35}
+.x{animation:fx 9s infinite}
+@keyframes fx{0%,55%{border-color:#2B3647;background:#1A222D}60%,95%{border-color:#FF6B8B;background:#3A1620}}
+@keyframes wt{0%{transform:scaleX(0)}70%,95%{transform:scaleX(1)}100%{transform:scaleX(1);opacity:0}}
+.d{position:absolute;width:18px;height:18px;border-radius:50%;background:#C6F33A;box-shadow:0 0 16px #C6F33A;opacity:0}
+.bus{position:absolute;left:300px;top:120px;width:60px;height:330px;border-radius:30px;background:linear-gradient(#C6F33A,#6EA8FF)}
+@keyframes f1{0%{opacity:0;transform:translate(0,0)}5%{opacity:1}30%{transform:translate(130px,0)}60%{transform:translate(410px,var(--y));opacity:1}70%,100%{opacity:0;transform:translate(410px,var(--y))}}
+.ok{position:absolute;left:32px;top:470px;font-size:26px;color:#C6F33A;font-family:ui-monospace,Menlo,Consolas,monospace;opacity:0;animation:okk 9s infinite}
+@keyframes okk{0%,8%{opacity:0}12%,95%{opacity:1}100%{opacity:0}}
+</style></head><body>
+<div class="pn" style="left:0">
+<div class="ttl" style="color:#FF6B8B">Síncrono: llamadas encadenadas</div>
+<div class="n" style="left:32px;top:120px">API</div><div class="n" style="left:232px;top:120px">Auth</div><div class="n" style="left:432px;top:120px">Imagen</div><div class="n x" style="left:618px;top:120px">IA</div>
+<div class="ln" style="left:182px;top:157px;width:50px"></div><div class="ln" style="left:382px;top:157px;width:50px"></div><div class="ln" style="left:582px;top:157px;width:36px"></div>
+<div class="w" style="left:32px;top:240px;width:736px;animation:wt 9s infinite"></div>
+<div class="w" style="left:232px;top:270px;width:536px;animation:wt 9s infinite .9s"></div>
+<div class="w" style="left:432px;top:300px;width:336px;animation:wt 9s infinite 1.8s"></div>
+<div class="ms" style="color:#C3CAD6">Cada servicio espera al siguiente. Si IA se cae, la API completa falla en cascada y el usuario ve un error.</div>
+</div>
+<div class="pn" style="left:864px">
+<div class="ttl" style="color:#C6F33A">Asíncrono: eventos por un bus</div>
+<div class="n" style="left:32px;top:246px">API</div>
+<div class="bus"></div>
+<div class="n" style="left:600px;top:110px">Auth</div><div class="n" style="left:600px;top:246px">Imagen</div><div class="n x" style="left:600px;top:382px">IA</div>
+<div class="d" style="left:182px;top:275px;--y:-136px;animation:f1 3s infinite"></div>
+<div class="d" style="left:182px;top:275px;--y:0px;animation:f1 3s infinite .3s"></div>
+<div class="d" style="left:182px;top:275px;--y:136px;animation:f1 3s infinite .6s"></div>
+<div class="ok">202 Accepted en ~50 ms</div>
+<div class="ms" style="color:#C3CAD6">La API publica y responde ya. Si IA se cae, sus mensajes esperan en la cola y se procesan al volver.</div>
+</div>
+</body></html></x-embed>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#8A93A3">Fuentes: SD5 – Semana 4 · Medium, “Asynchronous communication &amp; event-driven architectures” · servicios ilustrativos</p>
+
+</section>

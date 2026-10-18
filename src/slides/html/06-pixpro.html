@@ -1,0 +1,33 @@
+<section id="pixpro" data-transition="push" style="background:#0B0E13;color:#EEF0E8;font-family:'Space Grotesk', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:3px;color:#C6F33A;text-transform:uppercase">01 · Capstone · El producto</p>
+<h2 style="font-size:72px;font-weight:700;line-height:1.05;letter-spacing:-2px">PixPro de punta a punta</h2>
+<p style="font-size:30px;line-height:1.4;color:#A7B0BE;width:1500px">Plataforma distribuida de procesamiento de imágenes: el usuario sube lotes, el sistema aplica efectos y filtros de forma asíncrona y avisa en tiempo real por WebSocket; los resultados se sirven desde un CDN.</p>
+<x-embed style="position:absolute;left:128px;top:480px;width:1664px;height:420px"><!doctype html><html><head><style>
+body{margin:0;background:transparent;font-family:ui-sans-serif,system-ui,Segoe UI,Arial,sans-serif;color:#EEF0E8;overflow:hidden}
+.n{position:absolute;top:40px;width:220px;height:120px;border:3px solid #2B3647;background:#141A22;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:26px;font-weight:700;animation:hl 10s infinite}
+.n small{font-size:24px;font-weight:400;color:#A7B0BE;font-family:ui-monospace,Menlo,Consolas,monospace}
+@keyframes hl{0%{border-color:#C6F33A;box-shadow:0 0 40px rgba(198,243,58,.5);transform:translateY(-6px)}12%{border-color:#2B3647;box-shadow:none;transform:none}100%{border-color:#2B3647}}
+.ln{position:absolute;top:99px;height:3px;background:#2B3647}
+.tk{position:absolute;top:84px;left:95px;width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#FF8A3D,#C6F33A);box-shadow:0 0 24px #FF8A3D;animation:go 10s infinite}
+@keyframes go{0%{left:95px;opacity:1}12%{left:95px}15%{left:384px}27%{left:384px}30%{left:673px}42%{left:673px}45%{left:962px}57%{left:962px}60%{left:1251px}72%{left:1251px}75%{left:1540px}90%{left:1540px;opacity:1}100%{left:1540px;opacity:0}}
+.st{position:absolute;top:220px;left:0;width:1664px;height:60px;font-size:30px;font-family:ui-monospace,Menlo,Consolas,monospace;text-align:center}
+.st span{position:absolute;left:0;width:1664px;opacity:0;animation:sh 10s infinite}
+@keyframes sh{0%{opacity:0;transform:translateY(12px)}2%,13%{opacity:1;transform:none}15%,100%{opacity:0}}
+.ret{position:absolute;top:320px;left:110px;width:1444px;height:3px;background:repeating-linear-gradient(90deg,#6EA8FF 0 18px,transparent 18px 30px);animation:ds 1s linear infinite}
+@keyframes ds{to{background-position:30px 0}}
+.rl{position:absolute;top:340px;left:0;width:1664px;text-align:center;font-size:24px;color:#6EA8FF;font-family:ui-monospace,Menlo,Consolas,monospace}
+</style></head><body>
+<div class="ln" style="left:220px;width:69px"></div><div class="ln" style="left:509px;width:69px"></div><div class="ln" style="left:798px;width:69px"></div><div class="ln" style="left:1087px;width:69px"></div><div class="ln" style="left:1376px;width:69px"></div>
+<div class="n" style="left:0">SPA<small>usuario</small></div>
+<div class="n" style="left:289px;animation-delay:1.5s">API<small>REST</small></div>
+<div class="n" style="left:578px;animation-delay:3s">Event Bus<small>broker</small></div>
+<div class="n" style="left:867px;animation-delay:4.5s">Digester<small>filtros + IA</small></div>
+<div class="n" style="left:1156px;animation-delay:6s">CDN<small>resultados</small></div>
+<div class="n" style="left:1445px;animation-delay:7.5s">Notifier<small>WebSocket</small></div>
+<div class="tk"></div>
+<div class="st"><span>1 · POST /batches → 202 Accepted (no esperamos)</span><span style="animation-delay:1.5s">2 · API publica ImageUploaded / BatchQueued</span><span style="animation-delay:3s">3 · El broker enruta al consumidor suscrito</span><span style="animation-delay:4.5s">4 · El Digester aplica efectos, filtros o IA</span><span style="animation-delay:6s">5 · La imagen resultante se publica en el CDN</span><span style="animation-delay:7.5s">6 · ProcessingCompleted → push en tiempo real</span></div>
+<div class="ret"></div><div class="rl">← notificación en vivo a la SPA vía WebSocket / SignalR</div>
+</body></html></x-embed>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#8A93A3">Proyecto Capstone · descripción oficial del curso</p>
+
+</section>

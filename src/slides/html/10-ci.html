@@ -1,0 +1,43 @@
+<section id="ci" data-transition="push" style="background:#0B0E13;color:#EEF0E8;font-family:'Space Grotesk', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:3px;color:#C6F33A;text-transform:uppercase">01 · Capstone · Integración continua</p>
+<h2 style="font-size:72px;font-weight:700;line-height:1.05;letter-spacing:-2px">Pipeline de GitLab CI</h2>
+<x-embed style="position:absolute;left:128px;top:320px;width:1664px;height:220px"><!doctype html><html><head><style>
+body{margin:0;background:transparent;font-family:ui-sans-serif,system-ui,Segoe UI,Arial,sans-serif;color:#EEF0E8;overflow:hidden}
+.s{position:absolute;top:30px;width:300px;height:150px;border-radius:20px;background:#141A22;border:3px solid #2B3647;display:flex;flex-direction:column;justify-content:center;padding:0 28px;box-sizing:border-box;animation:on 10s infinite}
+.s b{font-size:30px}.s span{font-size:24px;color:#A7B0BE;font-family:ui-monospace,Menlo,Consolas,monospace}
+.dot{position:absolute;right:24px;top:24px;width:30px;height:30px;border-radius:50%;border:4px solid #6EA8FF;border-top-color:transparent;animation:rot 1s linear infinite,ok 10s infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+@keyframes on{0%{border-color:#2B3647}3%{border-color:#6EA8FF}15%,90%{border-color:#C6F33A}100%{border-color:#2B3647}}
+@keyframes ok{0%,14%{border-color:#6EA8FF;border-top-color:transparent;background:transparent}15%,90%{border-color:#C6F33A;background:#C6F33A}100%{border-color:#2B3647}}
+.a{position:absolute;top:103px;height:4px;width:41px;background:#2B3647}
+</style></head><body>
+<div class="s" style="left:0"><b>build</b><span>compile + lint</span><i class="dot"></i></div>
+<div class="a" style="left:300px"></div>
+<div class="s" style="left:341px;animation-delay:1.5s"><b>test</b><span>unit + coverage</span><i class="dot" style="animation-delay:0s,1.5s"></i></div>
+<div class="a" style="left:641px"></div>
+<div class="s" style="left:682px;animation-delay:3s"><b>quality gate</b><span>coverage ≥ 65%</span><i class="dot" style="animation-delay:0s,3s"></i></div>
+<div class="a" style="left:982px"></div>
+<div class="s" style="left:1023px;animation-delay:4.5s"><b>package</b><span>docker compose build</span><i class="dot" style="animation-delay:0s,4.5s"></i></div>
+<div class="a" style="left:1323px"></div>
+<div class="s" style="left:1364px;animation-delay:6s"><b>integration</b><span>compose up + e2e</span><i class="dot" style="animation-delay:0s,6s"></i></div>
+</body></html></x-embed>
+<div style="display:flex;flex-direction:row;gap:40px">
+<div style="height:224px;width:1664px;background:#0B0E13"></div>
+</div>
+<div style="display:flex;flex-direction:row;gap:40px">
+<div style="width:900px;background:#141A22;border:1px solid #2B3647;border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:4px;font-family:'JetBrains Mono', 'Courier New', monospace">
+<p style="font-size:24px;color:#8A93A3"># .gitlab-ci.yml (fragmento ilustrativo)</p>
+<p style="font-size:24px;color:#FF8A3D">stages: [build, test, quality, package, integration]</p>
+<p style="font-size:24px">test:</p>
+<p style="font-size:24px">  script: npm test -- --coverage   # o dotnet test + Coverlet</p>
+<p style="font-size:24px">integration:</p>
+<p style="font-size:24px">  script: docker compose -f compose.ci.yml up -d --build</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;justify-content:center">
+<p style="font-size:30px;line-height:1.4">Compose levanta API, broker, Digester y BD como en local.</p>
+<p style="font-size:30px;line-height:1.4;color:#A7B0BE">Si un job falla, el merge request queda bloqueado.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#8A93A3">Ilustrativo · adapten etapas e imágenes a su stack</p>
+
+</section>

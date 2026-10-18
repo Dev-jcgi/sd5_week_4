@@ -1,0 +1,29 @@
+<section id="tipos" data-transition="push" style="background:#0B0E13;color:#EEF0E8;font-family:'Space Grotesk', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:3px;color:#C6F33A;text-transform:uppercase">04 · Tipos y patrones · Clasificación</p>
+<h2 style="font-size:72px;font-weight:700;line-height:1.05;letter-spacing:-2px">Cuatro tipos de evento</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+<div style="background:#141A22;border-radius:20px;padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#FF8A3D">NOTIFICACIÓN</p>
+<p style="font-size:28px;line-height:1.35">Informa que algo ocurrió, sin más detalles. Ej.: “Usuario autenticado”.</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#A7B0BE">PixPro → BatchQueued {batchId}</p>
+</div>
+<div style="background:#141A22;border-radius:20px;padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6EA8FF">TRANSFERENCIA DE ESTADO (ECST)</p>
+<p style="font-size:28px;line-height:1.35">Lleva el estado después del cambio. Ej.: “Detalles del pedido actualizado”.</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#A7B0BE">PixPro → ProcessingCompleted {url, size}</p>
+</div>
+<div style="background:#141A22;border-radius:20px;padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#C6F33A">DE DOMINIO</p>
+<p style="font-size:28px;line-height:1.35">Hecho significativo del negocio. Ej.: “Producto añadido al inventario”.</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#A7B0BE">PixPro → ImageUploaded</p>
+</div>
+<div style="background:#141A22;border-radius:20px;padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#B78CFF">DELTA</p>
+<p style="font-size:28px;line-height:1.35">Solo la diferencia entre estados. Ej.: “Stock: −2 unidades”.</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#A7B0BE">PixPro → BatchProgress {processed: +1}</p>
+</div>
+</div>
+<p style="font-size:28px;line-height:1.4;color:#A7B0BE">Úsalos según el consumidor: alertas simples → notificación · integraciones sin consultas extra → ECST · reglas de negocio → dominio · alta frecuencia → delta.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#8A93A3">Fuentes: SD5 – Semana 4 (Serverless Land, “What are events?”) · ejemplos PixPro ilustrativos</p>
+
+</section>

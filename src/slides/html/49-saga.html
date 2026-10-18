@@ -1,0 +1,39 @@
+<section id="saga" data-transition="push" style="background:#0B0E13;color:#EEF0E8;font-family:'Space Grotesk', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:3px;color:#C6F33A;text-transform:uppercase">05 · Consistencia eventual · Patrones de resiliencia</p>
+<h2 style="font-size:72px;font-weight:700;line-height:1.05;letter-spacing:-2px">Saga + Outbox + idempotencia</h2>
+<x-embed style="position:absolute;left:128px;top:300px;width:1664px;height:250px"><!doctype html><html><head><style>
+body{margin:0;background:transparent;font-family:ui-sans-serif,system-ui,Segoe UI,Arial,sans-serif;color:#EEF0E8;overflow:hidden}
+.s{position:absolute;top:40px;width:340px;height:100px;border-radius:16px;background:#141A22;border:3px solid #2B3647;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:26px;font-weight:700}
+.s small{font-size:24px;font-weight:400;font-family:ui-monospace,Menlo,Consolas,monospace;color:#A7B0BE}
+.a{position:absolute;top:88px;height:5px;width:68px;background:#C6F33A;transform-origin:left;transform:scaleX(0)}
+.cp{position:absolute;top:190px;left:180px;width:1100px;height:5px;background:#FF6B8B;transform-origin:right;transform:scaleX(0);animation:cp 9s infinite}
+.cl{position:absolute;top:206px;left:180px;width:1100px;text-align:center;font-size:24px;color:#FF6B8B;font-family:ui-monospace,Menlo,Consolas,monospace;opacity:0;animation:cl 9s infinite}
+@keyframes g1{0%,8%{border-color:#2B3647}10%,95%{border-color:#C6F33A}100%{border-color:#2B3647}}
+@keyframes g2{0%,25%{border-color:#2B3647}27%,95%{border-color:#C6F33A}100%{border-color:#2B3647}}
+@keyframes g3{0%,42%{border-color:#2B3647}44%,95%{border-color:#FF6B8B;background:#3A1620}100%{border-color:#2B3647}}
+@keyframes g4{0%,70%{border-color:#2B3647}72%,95%{border-color:#FF8A3D}100%{border-color:#2B3647}}
+@keyframes l1{0%,15%{transform:scaleX(0)}20%,95%{transform:scaleX(1)}100%{transform:scaleX(0)}}
+@keyframes l2{0%,32%{transform:scaleX(0)}37%,95%{transform:scaleX(1)}100%{transform:scaleX(0)}}
+@keyframes l3{0%,58%{transform:scaleX(0)}63%,95%{transform:scaleX(1)}100%{transform:scaleX(0)}}
+@keyframes cp{0%,52%{transform:scaleX(0)}68%,95%{transform:scaleX(1)}100%{transform:scaleX(0)}}
+@keyframes cl{0%,60%{opacity:0}66%,95%{opacity:1}100%{opacity:0}}
+</style></head><body>
+<div class="s" style="left:0;animation:g1 9s infinite">1 Créditos<small>CreditsReserved</small></div>
+<div class="a" style="left:340px;animation:l1 9s infinite"></div>
+<div class="s" style="left:408px;animation:g2 9s infinite">2 Digester<small>ProcessingStarted</small></div>
+<div class="a" style="left:748px;animation:l2 9s infinite"></div>
+<div class="s" style="left:816px;animation:g3 9s infinite">3 Servicio IA<small>ProcessingFailed</small></div>
+<div class="a" style="left:1156px;background:#FF6B8B;animation:l3 9s infinite"></div>
+<div class="s" style="left:1224px;width:440px;animation:g4 9s infinite">4 Compensación<small>CreditsReleased</small></div>
+<div class="cp"></div><div class="cl">← falla en el paso 3: se compensa el paso 1 (sin 2PC, sin bloqueos)</div>
+</body></html></x-embed>
+<div style="height:250px;width:1664px;background:#0B0E13"></div>
+<table style="font-size:24px;color:#EEF0E8">
+<tr><th style="width:18%;text-align:left">Patrón</th><th style="width:44%;text-align:left">Propósito</th><th style="width:38%;text-align:left">Trade-off</th></tr>
+<tr><td>Saga</td><td>Transacciones distribuidas sin bloqueos, con acciones compensatorias</td><td>Difícil de trazar y depurar</td></tr>
+<tr><td>Outbox</td><td>Publicar el evento de forma atómica con el cambio local</td><td>Depende de un proceso en segundo plano (CDC)</td></tr>
+<tr><td>Idempotencia</td><td>Procesar dos veces el mismo mensaje no cambia el resultado</td><td>Guardar llaves de mensajes ya procesados</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#8A93A3">Fuente: Vinueza (2026), Tabla 1 · “la Saga se usa con Outbox y llaves de idempotencia” · flujo PixPro ilustrativo</p>
+
+</section>

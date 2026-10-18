@@ -1,0 +1,39 @@
+<section id="estructura" data-transition="push" style="background:#0B0E13;color:#EEF0E8;font-family:'Space Grotesk', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:3px;color:#C6F33A;text-transform:uppercase">04 · Tipos y patrones · Estructura</p>
+<h2 style="font-size:72px;font-weight:700;line-height:1.05;letter-spacing:-2px">Encabezado + payload: ¿ligero o rico?</h2>
+<div style="display:flex;flex-direction:row;gap:28px">
+<div style="flex:1;background:#141A22;border-radius:20px;padding:28px 32px;display:flex;flex-direction:column;gap:4px">
+<h3 style="font-size:34px;font-weight:700">Evento ligero</h3>
+<p style="font-size:24px;color:#A7B0BE">Menos acoplamiento; el consumidor consulta detalles (más latencia).</p>
+<div style="height:16px"></div>
+<div style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.3;display:flex;flex-direction:column;gap:0">
+<p>{</p>
+<p style="color:#FF8A3D">&#160;&#160;"type": "pixpro.image.processed.v1",</p>
+<p style="color:#FF8A3D">&#160;&#160;"id": "evt_9f2",</p>
+<p style="color:#FF8A3D">&#160;&#160;"time": "2026-10-15T16:21:07Z",</p>
+<p style="color:#C6F33A">&#160;&#160;"data": { "imageId": "img_481" }</p>
+<p>}</p>
+</div>
+</div>
+<div style="flex:1;background:#141A22;border-radius:20px;padding:28px 32px;display:flex;flex-direction:column;gap:4px">
+<h3 style="font-size:34px;font-weight:700">Evento rico</h3>
+<p style="font-size:24px;color:#A7B0BE">El consumidor procesa sin llamar de regreso; mensaje más grande.</p>
+<div style="height:16px"></div>
+<div style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.3;display:flex;flex-direction:column;gap:0">
+<p>{</p>
+<p style="color:#FF8A3D">&#160;&#160;"type": "pixpro.image.processed.v1",</p>
+<p style="color:#FF8A3D">&#160;&#160;"id": "evt_9f2",</p>
+<p style="color:#FF8A3D">&#160;&#160;"time": "2026-10-15T16:21:07Z",</p>
+<p style="color:#C6F33A">&#160;&#160;"data": {</p>
+<p style="color:#C6F33A">&#160;&#160;&#160;&#160;"imageId": "img_481",</p>
+<p style="color:#C6F33A">&#160;&#160;&#160;&#160;"batchId": "b_77",</p>
+<p style="color:#C6F33A">&#160;&#160;&#160;&#160;"url": "https://cdn…/img_481.webp",</p>
+<p style="color:#C6F33A">&#160;&#160;&#160;&#160;"filters": ["sepia", "resize"]</p>
+<p style="color:#C6F33A">&#160;&#160;}</p>
+<p>}</p>
+</div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#8A93A3">Naranja = encabezado · verde = payload · Fuente: SD5 – Semana 4 · formato inspirado en CloudEvents</p>
+
+</section>

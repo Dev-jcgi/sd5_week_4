@@ -1,0 +1,17 @@
+<section id="comparativa" data-transition="push" style="background:#F2F1EA;color:#10141A;font-family:'Space Grotesk', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:3px;color:#C2410C;text-transform:uppercase">03 · Corredores de mensajes · Criterios de selección</p>
+<h2 style="font-size:72px;font-weight:700;line-height:1.05;letter-spacing:-2px">¿RabbitMQ, Kafka o SQS?</h2>
+<table style="font-size:24px;color:#10141A">
+<tr><th style="width:19%;text-align:left">Criterio</th><th style="width:27%;text-align:left">RabbitMQ</th><th style="width:27%;text-align:left">Apache Kafka</th><th style="width:27%;text-align:left">Amazon SQS / SNS</th></tr>
+<tr><td>Modelo</td><td>Colas + exchanges</td><td>Log distribuido particionado</td><td>Cola + tópicos gestionados</td></tr>
+<tr><td>Volumen</td><td>Medio–alto</td><td>Muy alto</td><td>Alto, sin operar servidores</td></tr>
+<tr><td>Latencia</td><td>Baja</td><td>Baja a gran escala</td><td>Mayor; tareas diferidas</td></tr>
+<tr><td>Persistencia</td><td>Hasta el ack del consumidor</td><td>Retención y replay</td><td>Retención limitada, sin replay</td></tr>
+<tr><td>Escalabilidad</td><td>Clúster, quorum queues</td><td>Particiones horizontales</td><td>Automática</td></tr>
+<tr><td>Ecosistema</td><td>AMQP, MQTT, STOMP; muchos lenguajes</td><td>Kafka Connect, Streams</td><td>SDKs de AWS</td></tr>
+<tr><td>Costo</td><td>Open source; lo operas tú</td><td>Open source o gestionado</td><td>Pago por uso</td></tr>
+</table>
+<p style="font-size:28px;line-height:1.4;color:#4A5363"><b style="color:#10141A">Para PixPro, Fase 1:</b> RabbitMQ cubre colas de trabajo y pub/sub con baja latencia y corre en Docker Compose.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#5B6372">Fuentes: SD5 – Semana 4 · Confluent · AWS · Junta de Andalucía (recomienda Kafka para su caso)</p>
+
+</section>

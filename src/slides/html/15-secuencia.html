@@ -1,0 +1,31 @@
+<section id="secuencia" data-transition="push" style="background:#0B0E13;color:#EEF0E8;font-family:'Space Grotesk', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:3px;color:#C6F33A;text-transform:uppercase">01 · Capstone · Diagrama de secuencia</p>
+<h2 style="font-size:72px;font-weight:700;line-height:1.05;letter-spacing:-2px">De la petición a la notificación</h2>
+<x-embed style="position:absolute;left:128px;top:300px;width:1664px;height:620px"><!doctype html><html><head><style>
+body{margin:0;background:transparent;font-family:ui-sans-serif,system-ui,Segoe UI,Arial,sans-serif;color:#EEF0E8;overflow:hidden}
+.h{position:absolute;top:0;width:220px;height:60px;margin-left:-110px;border-radius:14px;background:#141A22;border:2px solid #2B3647;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700}
+.v{position:absolute;top:60px;width:0;height:560px;border-left:3px dashed #2B3647}
+.m{position:absolute;height:4px;transform:scaleX(0);animation:dw 16s infinite}
+.m.r{transform-origin:left}.m.l{transform-origin:right}
+.m:after{content:"";position:absolute;top:-9px;border:11px solid transparent}
+.m.r:after{right:-14px;border-left:14px solid currentColor}
+.m.l:after{left:-14px;border-right:14px solid currentColor}
+@keyframes dw{0%{transform:scaleX(0);opacity:1}4%{transform:scaleX(1)}85%{transform:scaleX(1);opacity:1}92%,100%{transform:scaleX(1);opacity:0}}
+.t{position:absolute;font-size:24px;opacity:0;animation:ft 16s infinite;white-space:nowrap;font-family:ui-monospace,Menlo,Consolas,monospace}
+@keyframes ft{0%{opacity:0}4%,85%{opacity:1}92%,100%{opacity:0}}
+</style></head><body>
+<div class="h" style="left:140px">SPA</div><div class="h" style="left:416px">API</div><div class="h" style="left:692px">Event Bus</div><div class="h" style="left:968px">Digester</div><div class="h" style="left:1244px">CDN</div><div class="h" style="left:1520px">Notifier</div>
+<div class="v" style="left:140px"></div><div class="v" style="left:416px"></div><div class="v" style="left:692px"></div><div class="v" style="left:968px"></div><div class="v" style="left:1244px"></div><div class="v" style="left:1520px"></div>
+<div class="t" style="left:160px;top:76px;color:#FF8A3D">1 POST /batches</div><div class="m r" style="left:140px;width:276px;top:112px;background:#FF8A3D;color:#FF8A3D"></div>
+<div class="t" style="left:160px;top:130px;color:#A7B0BE;animation-delay:1.2s">2 202 + batchId</div><div class="m l" style="left:140px;width:276px;top:166px;background:#A7B0BE;color:#A7B0BE;animation-delay:1.2s"></div>
+<div class="t" style="left:436px;top:184px;color:#C6F33A;animation-delay:2.4s">3 publish BatchQueued</div><div class="m r" style="left:416px;width:276px;top:220px;background:#C6F33A;color:#C6F33A;animation-delay:2.4s"></div>
+<div class="t" style="left:712px;top:238px;color:#C6F33A;animation-delay:3.6s">4 deliver (ack)</div><div class="m r" style="left:692px;width:276px;top:274px;background:#C6F33A;color:#C6F33A;animation-delay:3.6s"></div>
+<div class="t" style="left:988px;top:292px;color:#B78CFF;animation-delay:4.8s">5 filtro / IA</div><div class="m r" style="left:968px;width:276px;top:328px;background:#B78CFF;color:#B78CFF;animation-delay:4.8s"></div>
+<div class="t" style="left:712px;top:346px;color:#C6F33A;animation-delay:6s">6 publish ProcessingCompleted</div><div class="m l" style="left:692px;width:276px;top:382px;background:#C6F33A;color:#C6F33A;animation-delay:6s"></div>
+<div class="t" style="left:712px;top:400px;color:#C6F33A;animation-delay:7.2s">7 deliver a Notifier</div><div class="m r" style="left:692px;width:828px;top:436px;background:#C6F33A;color:#C6F33A;animation-delay:7.2s"></div>
+<div class="t" style="left:160px;top:454px;color:#FF8A3D;animation-delay:8.4s">8 push WebSocket: imagen lista + URL del CDN</div><div class="m l" style="left:140px;width:1380px;top:490px;background:#FF8A3D;color:#FF8A3D;animation-delay:8.4s"></div>
+<div class="t" style="left:160px;top:508px;color:#6EA8FF;animation-delay:9.6s">9 GET imagen desde el CDN</div><div class="m r" style="left:140px;width:1104px;top:544px;background:#6EA8FF;color:#6EA8FF;animation-delay:9.6s"></div>
+</body></html></x-embed>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#8A93A3">Ilustrativo · la SPA nunca espera bloqueada: recibe 202 y luego un push</p>
+
+</section>

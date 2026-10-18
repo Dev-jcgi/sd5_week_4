@@ -1,0 +1,48 @@
+<section id="outbox" data-transition="push" style="background:#0B0E13;color:#EEF0E8;font-family:'Space Grotesk', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:28px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:3px;color:#C6F33A;text-transform:uppercase">06 · Integración · Outbox pattern</p>
+<h2 style="font-size:72px;font-weight:700;line-height:1.05;letter-spacing:-2px">Outbox: guardar y publicar</h2>
+<x-embed style="position:absolute;left:128px;top:300px;width:1664px;height:610px"><!doctype html><html><head><style>
+body{margin:0;background:transparent;font-family:ui-sans-serif,system-ui,Segoe UI,Arial,sans-serif;color:#EEF0E8;overflow:hidden}
+.b{position:absolute;border-radius:16px;background:#141A22;border:3px solid #2B3647;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:28px;font-weight:700;text-align:center}
+.b small{font-size:24px;font-weight:400;color:#A7B0BE}
+.db{position:absolute;left:330px;top:30px;width:580px;height:470px;border-radius:24px;border:3px dashed #6EA8FF;background:#0F141B}
+.dl{position:absolute;left:356px;top:44px;font-size:24px;color:#6EA8FF;font-family:ui-monospace,Menlo,Consolas,monospace}
+.tb{position:absolute;left:370px;width:500px;height:160px;border-radius:14px;background:#1A222D;border:2px solid #2B3647;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:24px;padding:14px 20px;box-sizing:border-box}
+.tb b{display:block;color:#A7B0BE;margin-bottom:10px}
+.row{opacity:0;animation:rw 10s infinite;padding:6px 10px;border-radius:8px}
+@keyframes rw{0%,12%{opacity:0;background:transparent}16%{opacity:1;background:rgba(198,243,58,.25)}30%,95%{opacity:1;background:transparent}100%{opacity:0}}
+.st{position:absolute;right:20px;bottom:18px;font-size:24px;padding:2px 12px;border-radius:999px;background:#FF8A3D;color:#0B0E13;opacity:0;animation:pd 10s infinite}
+@keyframes pd{0%,14%{opacity:0}16%,62%{opacity:1;background:#FF8A3D}64%,95%{opacity:1;background:#C6F33A}100%{opacity:0}}
+.st{width:150px;height:34px}.st i{position:absolute;left:14px;top:2px;font-style:normal}.p1{animation:q1 10s infinite}.p2{opacity:0;animation:q2 10s infinite}
+@keyframes q1{0%,62%{opacity:1}64%,100%{opacity:0}}@keyframes q2{0%,63%{opacity:0}64%,95%{opacity:1}100%{opacity:0}}
+.br{position:absolute;left:356px;top:94px;width:528px;height:400px;border:4px solid #C6F33A;border-radius:18px;opacity:0;animation:tr 10s infinite}
+@keyframes tr{0%,13%{opacity:0}16%,26%{opacity:1}32%,100%{opacity:0}}
+.tl{position:absolute;left:560px;top:520px;width:300px;font-size:24px;color:#C6F33A;font-family:ui-monospace,Menlo,Consolas,monospace;opacity:0;animation:tr 10s infinite}
+.ln{position:absolute;height:4px;background:#2B3647}
+.tk{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:6px;opacity:0}
+.k1{background:#FF8A3D;animation:k1 10s infinite}
+@keyframes k1{0%{left:0;top:270px;opacity:0}2%{opacity:1}12%{left:330px;top:270px;opacity:1}14%,100%{opacity:0;left:330px}}
+.k2{background:#C6F33A;animation:k2 10s infinite}
+@keyframes k2{0%,38%{left:870px;top:380px;opacity:0}40%{opacity:1}50%{left:1010px;top:300px}60%{left:1390px;top:300px;opacity:1}62%,100%{opacity:0;left:1390px;top:300px}}
+.cap{position:absolute;left:0;top:570px;width:1664px;text-align:center;font-size:26px}
+.cap span{position:absolute;left:0;width:1664px;opacity:0}
+@keyframes c1{0%,1%{opacity:0}3%,34%{opacity:1}37%,100%{opacity:0}}
+@keyframes c2{0%,37%{opacity:0}40%,62%{opacity:1}65%,100%{opacity:0}}
+@keyframes c3{0%,64%{opacity:0}67%,95%{opacity:1}100%{opacity:0}}
+</style></head><body>
+<div class="b" style="left:0;top:210px;width:240px;height:120px">API<small>POST /images</small></div>
+<div class="ln" style="left:240px;top:268px;width:90px"></div>
+<div class="db"></div><div class="dl">BD de la API</div>
+<div class="br"></div><div class="tl">una sola transacción</div>
+<div class="tb" style="top:110px"><b>images</b><div class="row">img_481 · uploaded</div></div>
+<div class="tb" style="top:310px"><b>outbox</b><div class="row">ImageUploaded · img_481</div><span class="st"><i class="p1">pendiente</i><i class="p2">enviado</i></span></div>
+<div class="ln" style="left:910px;top:298px;width:90px"></div>
+<div class="b" style="left:1000px;top:240px;width:260px;height:120px;border-color:#B78CFF">Relay<small>polling o CDC</small></div>
+<div class="ln" style="left:1260px;top:298px;width:120px"></div>
+<div class="b" style="left:1380px;top:240px;width:278px;height:120px;border-color:#C6F33A">Broker<small>RabbitMQ</small></div>
+<i class="tk k1"></i><i class="tk k2"></i>
+<div class="cap"><span style="color:#C6F33A;animation:c1 10s infinite">1 · El cambio y el evento se guardan juntos: o ambos o ninguno</span><span style="color:#B78CFF;animation:c2 10s infinite">2 · El relay lee la outbox y publica en el broker</span><span style="color:#FF8A3D;animation:c3 10s infinite">3 · Marca el registro como enviado; si el broker cae, reintenta</span></div>
+</body></html></x-embed>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#8A93A3">Fuentes: SD5 – Semana 4 · Junta de Andalucía · Vinueza (2026) · animación ilustrativa</p>
+
+</section>
