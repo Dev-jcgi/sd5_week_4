@@ -76,8 +76,9 @@ Haz un push a `main` (o en **Actions → Publicar en GitHub Pages → Run workfl
 1. Profesor: abre el sitio → **Soy profesor** → contraseña → **Crear sala nueva**. Pulsa **PIN** para proyectarlo en grande.
 2. Estudiantes: abren el sitio → **Soy estudiante** → PIN + apodo.
 3. Avanza con las flechas del teclado o los botones ◀ ▶ (F = pantalla completa). En cada diapositiva de “Arena PixPro” aparece **Lanzar ronda N**.
-4. Durante la pregunta ves cuántos respondieron; luego **Revelar respuesta** → **Siguiente pregunta** → **Ver ranking** → **Volver a las diapositivas**.
-5. **Panel**: saltar a secciones, lanzar cualquier ronda, registro de aciertos por pregunta, ranking completo, exportar CSV, mostrar podio y cerrar la sala.
+4. Durante la pregunta ves cuántos respondieron; luego **Revelar respuesta** → **Siguiente pregunta** → al terminar la ronda, **Volver a las diapositivas** (el ranking no se muestra entre rondas).
+5. En la última diapositiva pulsa **Ver ranking final** (o ▶) → **Mostrar podio**.
+6. **Panel**: saltar a secciones, lanzar cualquier ronda, registro de aciertos por pregunta, ranking completo, exportar CSV, mostrar podio y cerrar la sala.
 
 ## Cambiar la contraseña o las respuestas
 

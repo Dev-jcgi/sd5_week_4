@@ -68,6 +68,17 @@ export default function Student() {
 
   if (!me) return <div className="page center-page"><Join onJoined={setMe} /></div>;
   if (room === undefined) return <div className="page center-page"><p className="note">Conectando con la sala…</p></div>;
+  if (room && room.closed && room.final) {
+    const mineF = room.final.ranking.find((x) => x.nick === myPlayer?.nick);
+    return (
+      <div className="page center-page">
+        <Podium players={players} me={me.uid} />
+        <div className="panel narrow"><h2>¡Fin de la clase!</h2>
+          <p className="exp">{mineF ? `Terminaste en el lugar #${mineF.pos} con ${mineF.score} pts.` : 'Gracias por participar.'}</p>
+          <button className="btn" onClick={() => setMe(null)}>Entrar a otra sala</button></div>
+      </div>
+    );
+  }
   if (!room || room.closed) return <div className="page center-page"><div className="panel narrow"><h2>La sala se cerró</h2><p className="exp">Gracias por participar.</p><button className="btn" onClick={() => setMe(null)}>Entrar a otra sala</button></div></div>;
 
   const q = room.qid ? QMAP[room.qid] : null;
@@ -89,7 +100,7 @@ export default function Student() {
   } else if (room.status === 'reveal' && q) {
     body = <RevealCard q={q} reveal={room.reveal} mine={myPlayer?.results?.[q.id] || null} score={myPlayer?.score || 0} />;
   } else if (room.status === 'board') {
-    body = <Leaderboard players={players} me={me.uid} title="Ranking parcial" />;
+    body = <Leaderboard players={players} me={me.uid} title="Ranking final" />;
   } else if (room.status === 'end') {
     body = <Podium players={players} me={me.uid} />;
   } else {
