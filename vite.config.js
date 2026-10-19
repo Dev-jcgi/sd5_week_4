@@ -6,5 +6,6 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   base: process.env.VITE_BASE || './',
   plugins: [react()],
+  define: { __BUILD__: JSON.stringify((process.env.GITHUB_SHA || 'local').slice(0, 7)) },
   build: { chunkSizeWarningLimit: 1500 },
 });

@@ -35,6 +35,7 @@ function Login({ onOk }) {
       <div className="field"><label htmlFor="pwd">Contraseña</label><input id="pwd" type="password" autoComplete="current-password" value={pwd} onChange={(e) => setPwd(e.target.value)} /></div>
       <button className="btn" disabled={busy || !pwd}>{busy ? 'Verificando…' : 'Entrar'}</button>
       {msg && <p className="note bad" role="alert">{msg}</p>}
+      <p className="note mono">Versión {__BUILD__}</p>
     </form>
   );
 }
@@ -67,13 +68,12 @@ function Lobby({ onRoom }) {
 }
 
 /* ---------- presentación + control del juego ---------- */
-function Presenter({ pin, keyMap, onExit, onNewRoom }) {
+function Presenter({ pin, keyMap, onExit, onNewRoom, intro = true }) {
   const [room, setRoom] = useState(null);
   const [players, setPlayers] = useState([]);
   const [answers, setAnswers] = useState({});
   const [drawer, setDrawer] = useState(false);
-  const [showPin, setShowPin] = useState(true);
-  useEffect(() => { setShowPin(true); }, [pin]);
+  const [showPin, setShowPin] = useState(intro);
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
@@ -225,24 +225,60 @@ function Presenter({ pin, keyMap, onExit, onNewRoom }) {
             <button className="btn ghost" onClick={() => { setDrawer(false); onNewRoom(); }}>Nueva sesión</button>
             <button className="btn danger" onClick={async () => { await update({ closed: true }); store.set('pixpro-host-pin', null); onExit(); }}>Cerrar sala</button>
           </div>
+          <p className="note mono">Versión {__BUILD__}</p>
         </aside>
       )}
     </div>
   );
 }
 
+const SKEY = 'pixpro-host-key';
+
 export default function Host() {
   const [keyMap, setKey] = useState(null);
   const [pin, setPin] = useState(null);
+  const [checking, setChecking] = useState(true);
+  const [intro, setIntro] = useState(true);
+  const [err, setErr] = useState('');
+
+  // Al recargar: si esta pestaña ya entró como profesor, vuelve directo a la sala sin pedir la contraseña.
+  useEffect(() => {
+    (async () => {
+      try {
+        const k = JSON.parse(sessionStorage.getItem(SKEY) || 'null');
+        if (k && (await api.hostSession())) {
+          setKey(k);
+          const last = store.get('pixpro-host-pin');
+          if (last) { const r = await api.getRoom(last).catch(() => null); if (r && !r.closed) { setIntro(false); setPin(last); } }
+        }
+      } catch (e) { console.error(e); }
+      setChecking(false);
+    })();
+  }, []);
+
+  const login = (k) => { try { sessionStorage.setItem(SKEY, JSON.stringify(k)); } catch { /* sin almacenamiento */ } setKey(k); };
+  const open = (p) => { setIntro(true); setPin(p); };
+
   // Nueva sesión: cierra la sala actual y abre otra con PIN (y QR) nuevos.
   const newRoom = async () => {
+    setErr('');
     try { if (pin) await api.updateRoom(pin, { closed: true }); } catch (e) { console.error(e); }
     const p = newPin();
-    await api.createRoom(p, { pin: p, status: 'slide', slide: 0, seq: 0, qid: null, reveal: null, scored: [], closed: false });
+    try {
+      await api.createRoom(p, { pin: p, status: 'slide', slide: 0, seq: 0, qid: null, reveal: null, scored: [], closed: false });
+    } catch (e) {
+      console.error(e);
+      setErr('No se pudo crear la sala nueva: la sesión de profesor se cerró en esta pestaña (por ejemplo, si abriste la página de estudiante en este mismo navegador). Vuelve a escribir la contraseña.');
+      try { sessionStorage.removeItem(SKEY); } catch { /* */ }
+      setKey(null); setPin(null);
+      return;
+    }
     store.set('pixpro-host-pin', p);
-    setPin(p);
+    open(p);
   };
-  if (!keyMap) return <div className="page center-page"><Login onOk={setKey} /></div>;
-  if (!pin) return <div className="page center-page"><Lobby onRoom={setPin} /></div>;
-  return <Presenter key={pin} pin={pin} keyMap={keyMap} onExit={() => setPin(null)} onNewRoom={newRoom} />;
+
+  if (checking) return <div className="page center-page"><p className="note">Comprobando sesión del profesor…</p></div>;
+  if (!keyMap) return <div className="page center-page">{err && <p className="note bad" role="alert" style={{ maxWidth: 560 }}>{err}</p>}<Login onOk={login} /></div>;
+  if (!pin) return <div className="page center-page"><Lobby onRoom={open} /></div>;
+  return <Presenter key={pin} pin={pin} keyMap={keyMap} intro={intro} onExit={() => setPin(null)} onNewRoom={newRoom} />;
 }

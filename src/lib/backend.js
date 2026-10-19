@@ -20,37 +20,53 @@ export const MODE = fbConfig.apiKey && fbConfig.projectId ? 'firebase' : 'local'
 
 /* ------------------------------------------------------------------ Firebase */
 function firebaseBackend() {
-  const app = initializeApp(fbConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-  const room = (pin) => doc(db, 'rooms', pin);
-  const authReady = new Promise((res) => { const u = onAuthStateChanged(auth, (x) => { u(); res(x); }); });
+  // Dos instancias separadas: la sesión del profesor y la del estudiante no se pisan
+  // aunque se abran en pestañas del mismo navegador.
+  const isHostPage = () => location.hash.startsWith('#/profesor');
+  const make = (name) => {
+    const app = initializeApp(fbConfig, name);
+    const auth = getAuth(app);
+    const ready = new Promise((res) => { const u = onAuthStateChanged(auth, (x) => { u(); res(x); }); });
+    return { auth, db: getFirestore(app), ready };
+  };
+  const inst = {};
+  const cur = () => { const n = isHostPage() ? 'host' : 'student'; return (inst[n] ||= make(n === 'host' ? '[DEFAULT]' : 'student')); };
+  const H = new Proxy({}, { get: (_, k) => cur()[k] });
+  const room = (pin) => doc(H.db, 'rooms', pin);
 
   return {
     mode: 'firebase',
     async ensureStudent() {
-      await authReady;
+      const { auth, ready } = cur();
+      await ready;
       if (auth.currentUser && !auth.currentUser.isAnonymous) await signOut(auth);
       if (!auth.currentUser) await signInAnonymously(auth);
       return auth.currentUser.uid;
     },
     async hostSignIn(password) {
-      const cred = await signInWithEmailAndPassword(auth, HOST_EMAIL, password);
+      const cred = await signInWithEmailAndPassword(cur().auth, HOST_EMAIL, password);
       return cred.user.uid;
+    },
+    // ¿La pestaña ya tiene la sesión del profesor? (Firebase la recuerda al recargar)
+    async hostSession() {
+      const { auth, ready } = cur();
+      await ready;
+      const u = auth.currentUser;
+      return !!u && !u.isAnonymous && u.email?.toLowerCase() === HOST_EMAIL.toLowerCase();
     },
     async getRoom(pin) { const s = await getDoc(room(pin)); return s.exists() ? s.data() : null; },
     createRoom: (pin, data) => setDoc(room(pin), { ...data, createdAt: serverTimestamp() }),
     updateRoom: (pin, patch) => updateDoc(room(pin), patch),
     watchRoom: (pin, cb) => onSnapshot(room(pin), (s) => cb(s.exists() ? s.data() : null)),
-    joinRoom: (pin, uid, nick) => setDoc(doc(db, 'rooms', pin, 'players', uid), { nick, score: 0, joinedAt: Date.now() }),
-    watchPlayers: (pin, cb) => onSnapshot(collection(db, 'rooms', pin, 'players'), (s) => cb(s.docs.map((d) => ({ id: d.id, ...d.data() })))),
-    submitAnswer: (pin, uid, qid, ans) => setDoc(doc(db, 'rooms', pin, 'answers', uid), { byQ: { [qid]: ans } }, { merge: true }),
-    watchMyAnswers: (pin, uid, cb) => onSnapshot(doc(db, 'rooms', pin, 'answers', uid), (s) => cb(s.exists() ? s.data().byQ || {} : {})),
-    watchAllAnswers: (pin, cb) => onSnapshot(collection(db, 'rooms', pin, 'answers'), (s) => cb(Object.fromEntries(s.docs.map((d) => [d.id, d.data().byQ || {}])))),
+    joinRoom: (pin, uid, nick) => setDoc(doc(H.db, 'rooms', pin, 'players', uid), { nick, score: 0, joinedAt: Date.now() }),
+    watchPlayers: (pin, cb) => onSnapshot(collection(H.db, 'rooms', pin, 'players'), (s) => cb(s.docs.map((d) => ({ id: d.id, ...d.data() })))),
+    submitAnswer: (pin, uid, qid, ans) => setDoc(doc(H.db, 'rooms', pin, 'answers', uid), { byQ: { [qid]: ans } }, { merge: true }),
+    watchMyAnswers: (pin, uid, cb) => onSnapshot(doc(H.db, 'rooms', pin, 'answers', uid), (s) => cb(s.exists() ? s.data().byQ || {} : {})),
+    watchAllAnswers: (pin, cb) => onSnapshot(collection(H.db, 'rooms', pin, 'answers'), (s) => cb(Object.fromEntries(s.docs.map((d) => [d.id, d.data().byQ || {}])))),
     async applyScores(pin, qid, rows) {
       for (let i = 0; i < rows.length; i += 400) {
-        const b = writeBatch(db);
-        rows.slice(i, i + 400).forEach((r) => b.update(doc(db, 'rooms', pin, 'players', r.uid), { score: increment(r.pts), [`results.${qid}`]: { ok: r.ok, pts: r.pts } }));
+        const b = writeBatch(H.db);
+        rows.slice(i, i + 400).forEach((r) => b.update(doc(H.db, 'rooms', pin, 'players', r.uid), { score: increment(r.pts), [`results.${qid}`]: { ok: r.ok, pts: r.pts } }));
         await b.commit();
       }
     },
@@ -77,6 +93,7 @@ function localBackend() {
     mode: 'local',
     ensureStudent: async () => uid,
     hostSignIn: async () => 'host-' + uid,
+    hostSession: async () => true,
     getRoom: async (pin) => { const r = R(read(), pin); return r ? r.state : null; },
     createRoom: async (pin, data) => write((d) => { d.rooms[pin] = { state: { ...data }, players: {}, answers: {} }; }),
     updateRoom: async (pin, patch) => write((d) => { Object.assign(R(d, pin).state, patch); }),
