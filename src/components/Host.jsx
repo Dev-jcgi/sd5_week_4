@@ -6,6 +6,7 @@ import { ROUNDS, QMAP, ROUND_BY_SLIDE, points, isCorrect } from '../data/rounds.
 import { SLIDES, SECTIONS } from '../lib/slides.js';
 import { store, newPin, celebrate } from '../lib/fx.js';
 import SlideStage from './SlideStage.jsx';
+import JoinQR, { joinUrl } from './JoinQR.jsx';
 import { QuestionCard, RevealCard, Leaderboard, Podium } from './Game.jsx';
 
 /* ---------- acceso con contraseña ---------- */
@@ -66,12 +67,13 @@ function Lobby({ onRoom }) {
 }
 
 /* ---------- presentación + control del juego ---------- */
-function Presenter({ pin, keyMap, onExit }) {
+function Presenter({ pin, keyMap, onExit, onNewRoom }) {
   const [room, setRoom] = useState(null);
   const [players, setPlayers] = useState([]);
   const [answers, setAnswers] = useState({});
   const [drawer, setDrawer] = useState(false);
-  const [showPin, setShowPin] = useState(false);
+  const [showPin, setShowPin] = useState(true);
+  useEffect(() => { setShowPin(true); }, [pin]);
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
@@ -165,12 +167,23 @@ function Presenter({ pin, keyMap, onExit }) {
       <div className="present-area">{stage}</div>
 
       {showPin && (
-        <div className="pin-overlay" onClick={() => setShowPin(false)}>
-          <p className="eyebrow">Entra a la Arena</p>
-          <p className="pin">{pin}</p>
-          <p className="exp">Abre <b className="mono">{location.origin + location.pathname}</b>, toca “Soy estudiante” y escribe el PIN.</p>
+        <div className="pin-overlay" role="dialog" aria-label="Entrar a la sala">
+          <p className="eyebrow">Escanea para entrar a la Arena</p>
+          <div className="join-grid">
+            <JoinQR pin={pin} size={320} />
+            <div className="join-info">
+              <p className="note mono">PIN de la sala</p>
+              <p className="pin">{pin}</p>
+              <p className="exp">O abre <b className="mono">{location.origin + location.pathname}</b>, toca “Soy estudiante” y escribe el PIN.</p>
+              <p className="note mono">{players.length} jugadores conectados</p>
+            </div>
+          </div>
           <div className="nicks">{players.map((p) => <span key={p.id} className="nick">{p.nick}</span>)}</div>
-          <p className="note">Toca para cerrar</p>
+          <div className="row-btns">
+            <button className="btn" onClick={() => setShowPin(false)}>Empezar la clase</button>
+            <button className="btn ghost" onClick={() => navigator.clipboard?.writeText(joinUrl(pin)).catch(() => {})}>Copiar enlace</button>
+            <button className="btn ghost" onClick={onNewRoom}>Nueva sesión (nuevo PIN y QR)</button>
+          </div>
         </div>
       )}
 
@@ -189,7 +202,7 @@ function Presenter({ pin, keyMap, onExit }) {
         {status === 'board' && <button className="btn" onClick={() => go(slide + 1)}>Volver a las diapositivas</button>}
         {status === 'end' && <button className="btn ghost" onClick={() => update({ status: 'slide' })}>Volver a las diapositivas</button>}
         <span className="grow" />
-        <button className="cbtn" onClick={() => setShowPin(true)}>PIN</button>
+        <button className="cbtn" onClick={() => setShowPin(true)}>PIN / QR</button>
         <button className="cbtn" onClick={() => setDrawer(!drawer)} aria-expanded={drawer}>Panel</button>
         <button className="cbtn" onClick={() => document.documentElement.requestFullscreen?.().catch(() => {})} aria-label="Pantalla completa">⛶</button>
       </nav>
@@ -209,6 +222,7 @@ function Presenter({ pin, keyMap, onExit }) {
           <div className="row-btns">
             <button className="btn ghost" onClick={exportCsv}>Exportar CSV</button>
             <button className="btn ghost" onClick={() => update({ status: 'end' })}>Mostrar podio</button>
+            <button className="btn ghost" onClick={() => { setDrawer(false); onNewRoom(); }}>Nueva sesión</button>
             <button className="btn danger" onClick={async () => { await update({ closed: true }); store.set('pixpro-host-pin', null); onExit(); }}>Cerrar sala</button>
           </div>
         </aside>
@@ -220,7 +234,15 @@ function Presenter({ pin, keyMap, onExit }) {
 export default function Host() {
   const [keyMap, setKey] = useState(null);
   const [pin, setPin] = useState(null);
+  // Nueva sesión: cierra la sala actual y abre otra con PIN (y QR) nuevos.
+  const newRoom = async () => {
+    try { if (pin) await api.updateRoom(pin, { closed: true }); } catch (e) { console.error(e); }
+    const p = newPin();
+    await api.createRoom(p, { pin: p, status: 'slide', slide: 0, seq: 0, qid: null, reveal: null, scored: [], closed: false });
+    store.set('pixpro-host-pin', p);
+    setPin(p);
+  };
   if (!keyMap) return <div className="page center-page"><Login onOk={setKey} /></div>;
   if (!pin) return <div className="page center-page"><Lobby onRoom={setPin} /></div>;
-  return <Presenter pin={pin} keyMap={keyMap} onExit={() => setPin(null)} />;
+  return <Presenter key={pin} pin={pin} keyMap={keyMap} onExit={() => setPin(null)} onNewRoom={newRoom} />;
 }

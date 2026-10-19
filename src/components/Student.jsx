@@ -37,7 +37,7 @@ function Join({ onJoined }) {
       <p className="eyebrow">Arena PixPro · estudiante</p>
       <h1 className="h-lg">Entra a la clase</h1>
       <div className="field"><label htmlFor="pin">PIN de la sala</label><input id="pin" inputMode="numeric" maxLength={6} autoComplete="off" placeholder="000000" value={pin} onChange={(e) => setPin(e.target.value.replace(/\D/g, ''))} /></div>
-      <div className="field"><label htmlFor="nick">Tu apodo</label><input id="nick" maxLength={20} placeholder="p. ej. Digester_Ninja" value={nick} onChange={(e) => setNick(e.target.value)} /></div>
+      <div className="field"><label htmlFor="nick">Tu apodo</label><input id="nick" autoFocus={!!pin} maxLength={20} placeholder="p. ej. Digester_Ninja" value={nick} onChange={(e) => setNick(e.target.value)} /></div>
       <button className="btn" disabled={busy}>{busy ? 'Entrando…' : 'Unirme'}</button>
       {msg && <p className="note bad" role="alert">{msg}</p>}
     </form>
